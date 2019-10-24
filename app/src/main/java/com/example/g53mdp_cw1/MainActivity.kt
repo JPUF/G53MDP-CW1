@@ -2,6 +2,7 @@ package com.example.g53mdp_cw1
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,15 +16,21 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var painter: FingerPainterView
 
+    private var brushSize = 1
+    private var brushShape = Paint.Cap.ROUND
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         painter = findViewById(R.id.painter)
+        brushSize = painter.brushWidth
+        brushShape = painter.brush
     }
 
     fun goToBrush(view: View) {
         val bundle = Bundle()
-        bundle.putInt("brushSize", 1)
+        bundle.putInt("brushSize", brushSize)
+        bundle.putSerializable("brushShape", brushShape)
         val brushIntent = Intent(this, BrushActivity::class.java)
         brushIntent.putExtras(bundle)
         startActivityForResult(brushIntent, BRUSH_ACTIVITY_REQUEST_CODE)
@@ -40,10 +47,12 @@ class MainActivity : AppCompatActivity() {
         if(requestCode == BRUSH_ACTIVITY_REQUEST_CODE) {
             if(resultCode == Activity.RESULT_OK) {
                 val bundle = data!!.extras
-                val brushSize = bundle!!.getInt("brushSize")
+                brushSize = bundle!!.getInt("brushSize")
                 Log.i("MainActivityResult", "Brush Size: $brushSize")
                 painter.brushWidth = brushSize
 
+                brushShape = bundle!!.getSerializable("brushShape") as Paint.Cap
+                painter.brush = brushShape
             }
         }
 
