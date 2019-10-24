@@ -2,6 +2,7 @@ package com.example.g53mdp_cw1
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private var brushSize = 1
     private var brushShape = Paint.Cap.ROUND
+    private var brushColor = Color.BLACK
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +39,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goToColor(view: View) {
-        startActivity(Intent(this, ColorActivity::class.java))
+        val bundle = Bundle()
+        bundle.putInt("color", Color.BLUE)
 
+        val colorIntent = Intent(this, ColorActivity::class.java)
+        colorIntent.putExtras(bundle)
+        startActivityForResult(colorIntent, COLOR_ACTIVITY_REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -54,6 +60,10 @@ class MainActivity : AppCompatActivity() {
                 brushShape = bundle!!.getSerializable("brushShape") as Paint.Cap
                 painter.brush = brushShape
             }
+        } else if(requestCode == COLOR_ACTIVITY_REQUEST_CODE) {
+            val bundle = data!!.extras
+            brushColor = bundle!!.getInt("color")
+            painter.colour = brushColor
         }
 
     }
