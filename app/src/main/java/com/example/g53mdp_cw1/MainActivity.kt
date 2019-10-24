@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         painter = findViewById(R.id.painter)
+
+        painter.load(intent.getData());
+
         brushSize = painter.brushWidth
         brushShape = painter.brush
         brushColor = painter.colour
