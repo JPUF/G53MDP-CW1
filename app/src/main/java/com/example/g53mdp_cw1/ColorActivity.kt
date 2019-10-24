@@ -12,14 +12,19 @@ class ColorActivity : AppCompatActivity() {
 
     private var color = Color.BLACK
 
+    lateinit var currentColor: View
     lateinit var bundle: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color)
 
+        currentColor = findViewById(R.id.rectangle)
+
+
         bundle = intent.extras!!
-        color = bundle!!.getInt("color")
+        color = bundle.getInt("color")
+        currentColor.setBackgroundColor(color)
     }
 
     fun returnToMain(view: View) {

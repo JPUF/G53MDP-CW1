@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         painter = findViewById(R.id.painter)
         brushSize = painter.brushWidth
         brushShape = painter.brush
+        brushColor = painter.colour
     }
 
     fun goToBrush(view: View) {
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     fun goToColor(view: View) {
         val bundle = Bundle()
-        bundle.putInt("color", Color.BLUE)
+        bundle.putInt("color", brushColor)
 
         val colorIntent = Intent(this, ColorActivity::class.java)
         colorIntent.putExtras(bundle)
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i("MainActivityResult", "Brush Size: $brushSize")
                 painter.brushWidth = brushSize
 
-                brushShape = bundle!!.getSerializable("brushShape") as Paint.Cap
+                brushShape = bundle.getSerializable("brushShape") as Paint.Cap
                 painter.brush = brushShape
             }
         } else if(requestCode == COLOR_ACTIVITY_REQUEST_CODE) {
