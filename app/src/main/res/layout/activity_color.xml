@@ -7,11 +7,56 @@
         android:layout_height="match_parent"
         tools:context=".ColorActivity">
 
-    <Button
-            android:text="@string/confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button" android:layout_marginEnd="16dp" android:layout_marginRight="16dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp" android:onClick="returnToMain"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/colors">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp" android:layout_marginEnd="16dp"
+                android:id="@+id/simpleColors">
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="64dp" app:srcCompat="@color/red" android:id="@+id/redImage"
+                    android:layout_weight="1" android:onClick="returnToMain" android:tag="red"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="64dp" app:srcCompat="@color/green" android:id="@+id/greenImage"
+                    android:layout_weight="1" android:onClick="returnToMain" android:tag="green"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="64dp" app:srcCompat="@color/blue" android:id="@+id/blueImage"
+                    android:layout_weight="1" android:onClick="returnToMain" android:tag="blue"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="64dp" app:srcCompat="@color/yellow" android:id="@+id/yellowImage"
+                    android:layout_weight="1" android:tag="yellow"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/otherColors">
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="64dp" app:srcCompat="@color/lightred" android:id="@+id/lightRedImage"
+                    android:layout_weight="1" android:tag="lightred" android:onClick="returnToMain"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="64dp" app:srcCompat="@color/lightgrey" android:id="@+id/lightGreyImage"
+                    android:layout_weight="1" android:tag="lightgrey" android:onClick="returnToMain"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="64dp" app:srcCompat="@color/grey" android:id="@+id/greyImage"
+                    android:layout_weight="1" android:tag="grey" android:onClick="returnToMain"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    app:srcCompat="@android:color/black"
+                    android:id="@+id/blackImage" android:layout_weight="1" android:layout_height="64dp"
+                    android:tag="black" android:onClick="returnToMain"/>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

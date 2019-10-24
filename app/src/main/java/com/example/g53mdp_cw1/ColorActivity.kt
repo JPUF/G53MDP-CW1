@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 
 class ColorActivity : AppCompatActivity() {
@@ -23,9 +24,23 @@ class ColorActivity : AppCompatActivity() {
 
     fun returnToMain(view: View) {
         val resultIntent = Intent()
-        bundle.putInt("color", Color.MAGENTA)
+        bundle.putInt("color", getColorSelection(view.tag.toString()))
         resultIntent.putExtras(bundle)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
+    }
+
+    private fun getColorSelection(tag: String): Int {
+        return when(tag) {
+            "red" -> Color.RED
+            "green" -> Color.GREEN
+            "blue" -> Color.BLUE
+            "yellow" -> Color.YELLOW
+            "lightred" -> Color.argb(255, 255, 102, 102)
+            "lightgrey" -> Color.LTGRAY
+            "grey" -> Color.GRAY
+            "black" -> Color.BLACK
+            else -> Color.BLACK
+        }
     }
 }
