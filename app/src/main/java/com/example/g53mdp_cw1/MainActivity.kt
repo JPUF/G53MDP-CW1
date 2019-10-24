@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import com.example.g53mdp_cw1.views.FingerPainterView
@@ -67,5 +68,26 @@ class MainActivity : AppCompatActivity() {
             painter.colour = brushColor
         }
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.i("InstanceState", "onSave: Color = $brushColor  -  size = $brushSize")
+        outState.putInt("brushColor", brushColor)
+        outState.putInt("brushSize", brushSize)
+        outState.putSerializable("brushShape", brushShape)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        brushColor = savedInstanceState.getInt("brushColor")
+        brushSize = savedInstanceState.getInt("brushSize")
+        brushShape = savedInstanceState.getSerializable("brushShape") as Paint.Cap
+
+        painter.colour = brushColor
+        painter.brushWidth = brushSize
+        painter.brush = brushShape
+
+        Log.i("InstanceState", "onRestore: Color = $brushColor  -  size = $brushSize")
     }
 }
