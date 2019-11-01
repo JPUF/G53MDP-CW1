@@ -12,7 +12,7 @@ class ColorActivity : AppCompatActivity() {
 
     private var color = Color.BLACK
 
-    lateinit var currentColor: View
+    private lateinit var currentColor: View
     lateinit var bundle: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +20,6 @@ class ColorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_color)
 
         currentColor = findViewById(R.id.rectangle)
-
 
         bundle = intent.extras!!
         color = bundle.getInt("color")
@@ -36,7 +35,7 @@ class ColorActivity : AppCompatActivity() {
     }
 
     private fun getColorSelection(tag: String): Int {
-        return when(tag) {
+        return when (tag) {
             "red" -> Color.RED
             "green" -> Color.GREEN
             "blue" -> Color.BLUE

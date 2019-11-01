@@ -13,7 +13,7 @@ import android.widget.TextView
 
 class BrushActivity : AppCompatActivity() {
 
-    lateinit var sizeSeekBar: SeekBar
+    private lateinit var sizeSeekBar: SeekBar
     lateinit var sizeTextView: TextView
     lateinit var bundle: Bundle
     var brushSize: Int = 1
@@ -31,10 +31,10 @@ class BrushActivity : AppCompatActivity() {
 
 
         bundle = intent.extras!!
-        brushSize = bundle!!.getInt("brushSize")
-        brushShape = bundle!!.getSerializable("brushShape") as Paint.Cap
+        brushSize = bundle.getInt("brushSize")
+        brushShape = bundle.getSerializable("brushShape") as Paint.Cap
 
-        when(brushShape) {
+        when (brushShape) {
             Paint.Cap.ROUND -> {
                 roundButton.isChecked = true
                 squareButton.isChecked = false
@@ -81,9 +81,9 @@ class BrushActivity : AppCompatActivity() {
         finish()
     }
 
-    fun getShape(): Paint.Cap {
+    private fun getShape(): Paint.Cap {
         val roundButton = findViewById<RadioButton>(R.id.roundButton)
-        return when(roundButton.isChecked) {
+        return when (roundButton.isChecked) {
             true -> Paint.Cap.ROUND
             false -> Paint.Cap.SQUARE
         }

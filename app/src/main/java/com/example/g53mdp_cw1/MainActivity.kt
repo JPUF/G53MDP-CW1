@@ -16,7 +16,7 @@ const val COLOR_ACTIVITY_REQUEST_CODE = 2
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var painter: FingerPainterView
+    private lateinit var painter: FingerPainterView
 
     private var brushSize = 1
     private var brushShape = Paint.Cap.ROUND
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         painter = findViewById(R.id.painter)
 
-        painter.load(intent.getData());
+        painter.load(intent.data)
 
         brushSize = painter.brushWidth
         brushShape = painter.brush
@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == BRUSH_ACTIVITY_REQUEST_CODE) {
-            if(resultCode == Activity.RESULT_OK) {
+        if (requestCode == BRUSH_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
                 val bundle = data!!.extras
                 brushSize = bundle!!.getInt("brushSize")
                 Log.i("MainActivityResult", "Brush Size: $brushSize")
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 brushShape = bundle.getSerializable("brushShape") as Paint.Cap
                 painter.brush = brushShape
             }
-        } else if(requestCode == COLOR_ACTIVITY_REQUEST_CODE) {
+        } else if (requestCode == COLOR_ACTIVITY_REQUEST_CODE) {
             val bundle = data!!.extras
             brushColor = bundle!!.getInt("color")
             painter.colour = brushColor
